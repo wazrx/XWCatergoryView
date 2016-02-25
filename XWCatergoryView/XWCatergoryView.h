@@ -11,11 +11,17 @@
 
 /**
  二、如何使用：
- 1、如果是当前控制器是导航控制器，必须做如下设置： self.automaticallyAdjustsScrollViewInsets = NO;
- 2、初始化该控件，代码和stroyboard都可以，stroyboard的话，直接拖入一个View并修改Class为XWCatergoryView即可;
- 3、设置数据源titles属性（必须）
- 4、设置与该控件关联的ScrollView（必须）
- 5、配置相关的属性
+  1、导入`XWCatergoryView.h`头文件
+ 
+ 2、如果是当前控制器是被导航控制器管理，也就是说上方有导航栏，必须对当前控制器做如下设置：`self.automaticallyAdjustsScrollViewInsets = NO;`否则控件显示会有问题
+ 
+ 3、初始化该控件，代码和stroyboard都可以，stroyboard的话，直接拖入一个View并修改Class为`XWCatergoryView`即可;
+ 
+ 4、设置数据源titles属性（必须）
+ 
+ 5、设置与该控件关联的ScrollView（必须）
+ 
+ 6、配置相关的属性即可使用，可自定义的属性比较多，请自行去`XWCatergoryView.h`中查看，更详请见地址中的demo
  */
 
 #import <UIKit/UIKit.h>
