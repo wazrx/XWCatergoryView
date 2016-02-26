@@ -18,6 +18,11 @@
 @end
 
 @implementation OneController
+
+- (void)dealloc{
+    NSLog(@"销毁了");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     //有导航控制器必须设置为NO
@@ -28,7 +33,7 @@
     layout.minimumInteritemSpacing = layout.minimumLineSpacing = 0;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.fullItem = YES;
-    UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 50, self.view.width, self.view.height - 50) collectionViewLayout:layout];
     mainView.backgroundColor = [UIColor whiteColor];
     mainView.dataSource = self;
     mainView.delegate = self;
@@ -37,11 +42,11 @@
     mainView.showsHorizontalScrollIndicator = NO;
     [mainView registerClass:[XWCollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
     [self.view addSubview:mainView];
-    [mainView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-    }];
+//    [mainView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.bottom.equalTo(self.view);
+//    }];
     //catergoryView
-    XWCatergoryView * catergoryView = [XWCatergoryView new];
+    XWCatergoryView * catergoryView = [[XWCatergoryView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, 50)];
     //必须设置titles数据源
     catergoryView.titles = self.titles;
     //必须设置关联的scrollview
@@ -59,13 +64,16 @@
     catergoryView.scrollWithAnimaitonWhenClicked = NO;
     catergoryView.backgroundColor = [UIColor grayColor];
     catergoryView.titleColorChangeGradually = YES;
+    catergoryView.backEllipseEable = YES;
+//    self.navigationItem.titleView = catergoryView;
     [self.view addSubview:catergoryView];
-    [catergoryView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view.mas_top).offset(64);
-        make.height.equalTo(@50);
-        make.bottom.equalTo(mainView.mas_top);
-    }];
+//    [catergoryView layoutSubviews];
+//    [catergoryView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.view);
+//        make.top.equalTo(self.view.mas_top).offset(64);
+//        make.height.equalTo(@50);
+//        make.bottom.equalTo(mainView.mas_top);
+//    }];
     
 }
 

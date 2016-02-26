@@ -15,7 +15,11 @@
 }
 
 - (CGRect)backEllipseFrame{
-    return CGRectMake(_cellCenter.x - _cellSize.width / 2.0f - 5, _cellCenter.y - _cellSize.height / 2.0f - 2, _cellSize.width + 10, _cellSize.height + 4);
+    if (CGSizeEqualToSize(CGSizeZero, _backEllipseSize)) {
+        return CGRectMake(_cellCenter.x - _cellSize.width / 2.0f - 5, _cellCenter.y - _cellSize.height / 2.0f - 2, _cellSize.width + 10, _cellSize.height + 4);
+    }else{
+        return CGRectMake(_cellCenter.x - _backEllipseSize.width / 2.0f, _cellCenter.y - _backEllipseSize.height / 2.0f, _backEllipseSize.width, _backEllipseSize.height);
+    }
 }
 
 - (CGFloat)valueRatio{

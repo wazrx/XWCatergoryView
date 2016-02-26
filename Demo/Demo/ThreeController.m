@@ -50,6 +50,8 @@
     catergoryView.scrollView = mainView;
     catergoryView.delegate = self;
     catergoryView.backgroundColor = [UIColor grayColor];
+    //刷新后保持原来的index
+    catergoryView.holdLastIndexAfterUpdate = YES;
     //开启缩放
     catergoryView.scaleEnable = YES;
     //设置缩放等级

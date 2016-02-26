@@ -17,6 +17,7 @@
 @property (nonatomic, assign) CGPoint cellCenter;
 @property (nonatomic, assign,readonly) CGRect cellFrame;
 @property (nonatomic, assign, readonly) CGRect backEllipseFrame;
+@property (nonatomic, assign) CGSize backEllipseSize;
 
 
 @end

@@ -56,6 +56,7 @@
     _bottomLineWidth = 2.0f;
     _bottomLineSpacingFromTitleBottom = 10.0f;
     _backEllipseColor = [UIColor yellowColor];
+    _backEllipseSize = CGSizeZero;
 }
 
 
@@ -182,6 +183,15 @@
 - (void)setBackEllipseColor:(UIColor *)backEllipseColor{
     _backEllipseColor = backEllipseColor;
     _backEllipse.fillColor = backEllipseColor.CGColor;
+}
+
+- (void)setBackEllipseSize:(CGSize)backEllipseSize{
+    _backEllipseSize = backEllipseSize;
+    if (!CGSizeEqualToSize(CGSizeZero, backEllipseSize)) {
+        for (XWCatergoryViewCellModel *model in _data) {
+            model.backEllipseSize = backEllipseSize;
+        }
+    }
 }
 
 #pragma mark - private methods
@@ -332,9 +342,13 @@
 #pragma mark - public methods
 
 - (void)xw_realoadData{
-    [_scrollView setContentOffset:CGPointZero];
-    _lastIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    if (!_holdLastIndexAfterUpdate || _data.count - 1 < _lastIndexPath.item) {
+        _lastIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+        [_scrollView setContentOffset:CGPointZero];
+    }
     [_mainView reloadData];
+    [_mainView.collectionViewLayout prepareLayout];
+    [self layoutSubviews];
 }
 
 #pragma mark - KVO
