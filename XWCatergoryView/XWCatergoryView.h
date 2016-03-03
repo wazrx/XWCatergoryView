@@ -29,7 +29,6 @@
  1、将新的数据源赋给titles
  
  2、调用xw_realoadData进行刷新
-=======
  */
 
 #import <UIKit/UIKit.h>
@@ -69,6 +68,9 @@
 
 /**代理，可监听item按钮点击*/
 @property (nonatomic, assign) id<XWCatergoryViewDelegate> delegate;
+
+/**设置初始化默认选中的index，默认0*/
+@property (nonatomic, assign) NSUInteger defaultIndex;
 
 #pragma mark - item
 
