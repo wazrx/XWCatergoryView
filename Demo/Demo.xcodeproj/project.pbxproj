@@ -35,6 +35,7 @@
 		400DB9921C7B12EC0096534A /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 400DB9861C7B12EC0096534A /* View+MASAdditions.m */; };
 		400DB9931C7B12EC0096534A /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 400DB9891C7B12EC0096534A /* ViewController+MASAdditions.m */; };
 		400DB9961C7B13550096534A /* UICollectionViewFlowLayout+XWFullItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 400DB9951C7B13550096534A /* UICollectionViewFlowLayout+XWFullItem.m */; };
+		40CA0E521C87F91B00012DD8 /* XWCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40CA0E511C87F91B00012DD8 /* XWCollectionView.m */; };
 		8B5016F11C7DDFDA005772B7 /* XWCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5016F01C7DDFDA005772B7 /* XWCollectionViewCell.m */; };
 		8B5016F41C7DEBDF005772B7 /* UIActivityIndicatorView+XWAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5016F31C7DEBDF005772B7 /* UIActivityIndicatorView+XWAdd.m */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,8 @@
 		400DB9891C7B12EC0096534A /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		400DB9941C7B13550096534A /* UICollectionViewFlowLayout+XWFullItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewFlowLayout+XWFullItem.h"; sourceTree = "<group>"; };
 		400DB9951C7B13550096534A /* UICollectionViewFlowLayout+XWFullItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewFlowLayout+XWFullItem.m"; sourceTree = "<group>"; };
+		40CA0E501C87F91B00012DD8 /* XWCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWCollectionView.h; sourceTree = "<group>"; };
+		40CA0E511C87F91B00012DD8 /* XWCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWCollectionView.m; sourceTree = "<group>"; };
 		8B5016EF1C7DDFDA005772B7 /* XWCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWCollectionViewCell.h; sourceTree = "<group>"; };
 		8B5016F01C7DDFDA005772B7 /* XWCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWCollectionViewCell.m; sourceTree = "<group>"; };
 		8B5016F21C7DEBDF005772B7 /* UIActivityIndicatorView+XWAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+XWAdd.h"; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				400DB9561C7AD4440096534A /* UIView+FrameChange.h */,
 				400DB9581C7AD53D0096534A /* UIColor+XWAdd.h */,
 				400DB9591C7AD53D0096534A /* UIColor+XWAdd.m */,
+				40CA0E501C87F91B00012DD8 /* XWCollectionView.h */,
+				40CA0E511C87F91B00012DD8 /* XWCollectionView.m */,
 			);
 			path = XWCatergoryView;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				400DB94E1C7AD3160096534A /* XWCatergoryView.m in Sources */,
 				400DB94D1C7AD3160096534A /* XWCatergoryViewProperty.m in Sources */,
 				400DB94C1C7AD3160096534A /* XWCatergoryViewCell.m in Sources */,
+				40CA0E521C87F91B00012DD8 /* XWCollectionView.m in Sources */,
 				400DB95A1C7AD53D0096534A /* UIColor+XWAdd.m in Sources */,
 				400DB98A1C7B12EC0096534A /* MASCompositeConstraint.m in Sources */,
 				400DB9511C7AD3920096534A /* XWCatergoryViewCellModel.m in Sources */,

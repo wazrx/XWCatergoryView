@@ -69,6 +69,9 @@
 /**代理，可监听item按钮点击*/
 @property (nonatomic, assign) id<XWCatergoryViewDelegate> delegate;
 
+/**设置初始化默认选中的index，默认0*/
+@property (nonatomic, assign) NSUInteger defaultIndex;
+
 #pragma mark - item
 
 /**item间距，默认10，如果计算出的item排布的总宽度小于控件宽度，会自动修改item让item均布*/

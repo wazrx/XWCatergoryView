@@ -49,6 +49,8 @@
     /**开启背后椭圆*/
     catergoryView.backEllipseEable = YES;
     catergoryView.scrollWithAnimaitonWhenClicked = NO;
+    /**设置默认defaultIndex*/
+    catergoryView.defaultIndex = 6;
     catergoryView.backgroundColor = [UIColor grayColor];
     [self.view addSubview:catergoryView];
     [catergoryView mas_makeConstraints:^(MASConstraintMaker *make) {

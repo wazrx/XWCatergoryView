@@ -7,6 +7,7 @@
 //
 
 #import "XWCatergoryView.h"
+#import "XWCollectionView.h"
 #import "XWCatergoryViewLayout.h"
 #import "XWCatergoryViewCellModel.h"
 #import "XWCatergoryViewCell.h"
@@ -15,13 +16,13 @@
 #import "XWCatergoryViewProperty.h"
 
 @interface XWCatergoryView ()<UICollectionViewDataSource, UICollectionViewDelegate>
-@property (nonatomic, weak) UICollectionView *mainView;
+@property (nonatomic, weak) XWCollectionView *mainView;
 @property (nonatomic, weak) UIView *bottomLine;
 @property (nonatomic, weak) CAShapeLayer *backEllipse;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) XWCatergoryViewProperty *property;
 @property (nonatomic, copy) NSArray *data;
-@property (nonatomic, assign) BOOL firstLoad;
+@property (nonatomic, assign) BOOL autoScrollAnimationEable;
 @property (nonatomic, weak) XWCatergoryViewCellModel *fromModel;
 @property (nonatomic, weak) XWCatergoryViewCellModel *toModel;
 @end
@@ -86,7 +87,7 @@
     XWCatergoryViewProperty *property = [XWCatergoryViewProperty new];
     _property = property;
     catergoryLayout.property = property;
-    UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:catergoryLayout];
+    XWCollectionView *mainView = [[XWCollectionView alloc] initWithFrame:self.frame collectionViewLayout:catergoryLayout];
     _mainView = mainView;
     mainView.dataSource = self;
     mainView.delegate = self;
@@ -97,6 +98,7 @@
     [self addSubview:mainView];
     CAShapeLayer * backEllipse = [CAShapeLayer new];
     _backEllipse = backEllipse;
+    mainView.backLayer = backEllipse;
     backEllipse.fillColor = _backEllipseColor.CGColor;
     [mainView.layer addSublayer:_backEllipse];
     UIView *bottomLine = [UIView new];
@@ -109,12 +111,20 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     _mainView.frame = self.bounds;
+    if (!_lastIndexPath) {
+        _lastIndexPath = [NSIndexPath indexPathForItem:MIN(_defaultIndex, _titles.count - 1) inSection:0];
+        _autoScrollAnimationEable = NO;
+    }
     //初始化各个控件的状态
     NSInteger idx = _lastIndexPath.item;
     [self xwp_setNeedUpdateModelWithRatio:idx];
     [self xwp_interpolationForBottomLineWithRatio:idx];
     [self xwp_interpolationForBackEllipseWithRatio:idx];
     [self xwp_interpolationForItemsWithRatio:idx];
+    [_scrollView setContentOffset:CGPointMake(_scrollView.width * idx, 0)];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_mainView scrollToItemAtIndexPath:_lastIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:_autoScrollAnimationEable];
+        });
 }
 
 #pragma mark - setter methods
@@ -227,7 +237,6 @@
     CGFloat cornerRadius = _fromModel.backEllipseFrame.size.height / 2.0f;
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(x, y, width, height) cornerRadius:cornerRadius];
     _backEllipse.path = path.CGPath;
-    [_mainView.layer insertSublayer:_backEllipse atIndex:0];
     
 }
 /**滚动时，刷新item，不使用reloadData，因为会触发prepareLayout，这里没必要，只有titles变了才需要prepareLayout，这里我采用了遍历所有模型修改模型属性，同时遍历可见item，调用自己的刷新方法达到目的且保证重用，并且不会触发prepareLayout，性能更好，大家可自行测试*/
@@ -293,7 +302,6 @@
         [_backEllipse addAnimation:anim forKey:@"pathAnim"];
     }
     _backEllipse.path = path.CGPath;
-    [_mainView.layer insertSublayer:_backEllipse atIndex:0];
 }
 
 #pragma mark - <UICollectionViewDataSouce>
@@ -306,7 +314,6 @@
     XWCatergoryViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"XWCatergoryViewCell" forIndexPath:indexPath];
     cell.property = _property;
     cell.data = _data[indexPath.row];
-    [_mainView.layer insertSublayer:_backEllipse atIndex:0];
     return cell;
 }
 
@@ -348,6 +355,7 @@
     }
     [_mainView reloadData];
     [_mainView.collectionViewLayout prepareLayout];
+    _autoScrollAnimationEable = YES;
     [self layoutSubviews];
 }
 
