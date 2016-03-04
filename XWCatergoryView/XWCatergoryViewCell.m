@@ -48,7 +48,7 @@
     colorLabel.textColor = [UIColor orangeColor];
     _colorLabel = colorLabel;
     colorLabel.frame = self.bounds;
-    titleLabel.textAlignment = 1;
+    colorLabel.textAlignment = 1;
     [self.contentView addSubview:colorLabel];
     CAShapeLayer *titlemaskLayer = [CAShapeLayer new];
      _titlemaskLayer = titlemaskLayer;

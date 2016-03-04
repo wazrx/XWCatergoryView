@@ -28,6 +28,7 @@
 
 - (void)prepareLayout{
     [super prepareLayout];
+//    NSLog(@"prepareLayout");
     _contentWidth = 0;
     _realItemSpacing = _property.itemSpacing;
     //把所有title组合成一个字符串计算所有的文字的宽度
@@ -64,7 +65,8 @@
     XWCatergoryViewCellModel *model = _property.data[indexPath.item];
     //计算每个item的size
     CGSize size = [model.title xw_sizeWithfont:_property.titleFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
-    attr.size = size;
+//    attr.size = size;
+    attr.size = CGSizeMake(size.width + _realItemSpacing, self.collectionView.height);
     model.cellSize = size;
     //计算每个item的center
     CGFloat centerX = _totleCenterX + _realItemSpacing + size.width / 2.0f;

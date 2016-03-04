@@ -113,7 +113,7 @@
 
 #pragma mark - backEllipse
 
-/**是否隐藏背后的椭圆，默认YES*/
+/**是否开启背后的椭圆，默认NO*/
 @property (nonatomic, assign) BOOL backEllipseEable;
 /**椭圆颜色，默认黄色*/
 @property (nonatomic, strong) UIColor *backEllipseColor;
