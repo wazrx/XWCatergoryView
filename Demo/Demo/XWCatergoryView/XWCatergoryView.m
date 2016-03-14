@@ -112,20 +112,20 @@
     [super layoutSubviews];
 //    NSLog(@"layoutSubviews");
     _mainView.frame = self.bounds;
-//    if (!_lastIndexPath) {
-//        _lastIndexPath = [NSIndexPath indexPathForItem:MIN(_defaultIndex, _titles.count - 1) inSection:0];
-//        _autoScrollAnimationEable = NO;
-//    }
+    if (!_lastIndexPath) {
+        _lastIndexPath = [NSIndexPath indexPathForItem:MIN(_defaultIndex, _titles.count - 1) inSection:0];
+        _autoScrollAnimationEable = NO;
+    }
     //初始化各个控件的状态
     NSInteger idx = _lastIndexPath.item;
     [self xwp_setNeedUpdateModelWithRatio:idx];
     [self xwp_interpolationForBottomLineWithRatio:idx];
     [self xwp_interpolationForBackEllipseWithRatio:idx];
     [self xwp_interpolationForItemsWithRatio:idx];
-//    [_scrollView setContentOffset:CGPointMake(_scrollView.width * idx, 0)];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [_mainView scrollToItemAtIndexPath:_lastIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:_autoScrollAnimationEable];
-//        });
+    [_scrollView setContentOffset:CGPointMake(_scrollView.width * idx, 0)];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_mainView scrollToItemAtIndexPath:_lastIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:_autoScrollAnimationEable];
+        });
 }
 
 #pragma mark - setter methods
