@@ -65,6 +65,7 @@
     catergoryView.backgroundColor = [UIColor grayColor];
     catergoryView.titleColorChangeGradually = YES;
     catergoryView.backEllipseEable = YES;
+    catergoryView.defaultIndex =15;
 //    self.navigationItem.titleView = catergoryView;
     [self.view addSubview:catergoryView];
 //    [catergoryView layoutSubviews];
@@ -79,7 +80,7 @@
 
 - (NSArray *)titles{
     if (!_titles) {
-        _titles = @[@"热门", @"新上榜", @"连载", @"生活家",@"世间事", @"@IT", @"市集", @"七日热门", @"三十日热门"];
+        _titles = @[@"Drama", @"Drama", @"Drama", @"Drama", @"Drama", @"Drama",@"Drama",@"Drama",@"Drama",@"Drama",@"Drama",@"Drama", @"Drama", @"Drama", @"Drama", @"Drama", @"Drama",@"Drama",@"Drama",@"Drama",@"Drama",@"Drama",@"Drama", @"Drama", @"Drama", @"Drama", @"Drama", @"Drama",@"Drama",@"Drama",@"Drama"];
     }
     return _titles;
 }

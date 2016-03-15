@@ -39,6 +39,7 @@
 
 @property (nonatomic, assign) BOOL scaleEnable;
 @property (nonatomic, assign) CGFloat scaleRatio;
+@property (nonatomic, assign) CGFloat contentWidth;
 
 
 @end

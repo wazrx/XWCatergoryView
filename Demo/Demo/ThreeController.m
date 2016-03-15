@@ -48,6 +48,7 @@
     _catergoryView = catergoryView;
     catergoryView.titles = self.titles;
     catergoryView.scrollView = mainView;
+    catergoryView.itemSpacing = 30;
     catergoryView.delegate = self;
     catergoryView.backgroundColor = [UIColor grayColor];
     //刷新后保持原来的index
@@ -58,7 +59,7 @@
     catergoryView.scaleRatio = 1.2;
     //开启点击item滑动scrollView的动画
     catergoryView.scrollWithAnimaitonWhenClicked = YES;
-    catergoryView.defaultIndex = 3;
+    catergoryView.defaultIndex = 1;
     [self.view addSubview:catergoryView];
     [catergoryView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -73,7 +74,7 @@
 
 - (NSArray *)titles{
     if (!_titles) {
-        _titles = @[@"热门", @"新上榜", @"连载",@"七日热门",@"世间事", @"@IT"];
+        _titles = @[@"热门", @"新上榜", @"连载",@"七日热门"];
     }
     return _titles;
 }
@@ -84,12 +85,12 @@
     sender.enabled = NO;
     [UIActivityIndicatorView xw_showAnimationInView:self.view];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (_titles.count == 6) {
-            _titles = @[@"热门", @"新上榜", @"连载", @"生活家",@"世间事", @"@IT", @"市集", @"七日热门", @"三十日热门"];
-            _catergoryView .itemSpacing = 30;
+        if (_titles.count == 4) {
+            _titles = @[@"连载",@"七日热门",@"热门", @"新上榜", @"连载", @"生活家",@"世间事", @"@IT", @"市集", @"七日热门", @"三十日热门"];
+            _catergoryView.itemSpacing = 30;
             
         }else{
-            _titles = @[@"热门", @"新上榜", @"连载",@"七日热门",@"世间事", @"@IT"];
+            _titles = @[@"热门", @"新上榜", @"连载",@"七日热门"];
         }
         [UIActivityIndicatorView xw_stopAnimationInView:self.view];
         sender.enabled = YES;

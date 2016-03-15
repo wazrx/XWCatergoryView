@@ -36,6 +36,7 @@
     _totleTitleWidth = [allTitles xw_sizeWithfont:_property.titleFont maxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)].width;
     //计算contentWidth
     _contentWidth = _totleTitleWidth + _property.edgeSpacing * 2 + _realItemSpacing * (_property.data.count - 1);
+    _property.contentWidth = _contentWidth;
     //判断是否需要滚动
     _needScroll = _contentWidth > self.collectionView.width;
     //如果不需要滚动，说明如果按用户设置的属性可能无法正确布局，我们自行改变itemSpacing进行均布

@@ -123,9 +123,7 @@
     [self xwp_interpolationForBackEllipseWithRatio:idx];
     [self xwp_interpolationForItemsWithRatio:idx];
     [_scrollView setContentOffset:CGPointMake(_scrollView.width * idx, 0)];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_mainView scrollToItemAtIndexPath:_lastIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:_autoScrollAnimationEable];
-        });
+    [self xwp_setMainViewContentOffsetWithIndex:idx];
 }
 
 #pragma mark - setter methods
@@ -207,6 +205,16 @@
 
 #pragma mark - private methods
 
+- (void)xwp_setMainViewContentOffsetWithIndex:(NSUInteger)index{
+    if (_fromModel.cellCenter.x <= _mainView.width / 2.0f || _property.contentWidth <= _mainView.width) {
+        [_mainView setContentOffset:CGPointZero animated:_autoScrollAnimationEable];
+        return;
+    }
+    CGFloat offsetX = _fromModel.cellCenter.x - _mainView.width / 2.0f;
+    CGFloat maxOffsetX = _property.contentWidth - _mainView.width;
+    [_mainView setContentOffset:CGPointMake(fmin(offsetX, maxOffsetX), 0) animated:_autoScrollAnimationEable];
+}
+
 /**设置当前需要操作的数据模型*/
 - (void)xwp_setNeedUpdateModelWithRatio:(CGFloat)ratio{
     if (!_data.count) return;
@@ -252,7 +260,8 @@
 
 - (void)xwp_ScrollToIndexPath:(NSIndexPath *)indexPath{
     [_scrollView setContentOffset:CGPointMake(_scrollView.width * indexPath.item, 0) animated:_scrollWithAnimaitonWhenClicked];
-    [_mainView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    _autoScrollAnimationEable = YES;
+    [self xwp_setMainViewContentOffsetWithIndex:indexPath.item];
 }
 
 - (void)xwp_updateWhenScrollViewDidScroll{
@@ -266,7 +275,9 @@
     if ((int)ratio == ratio) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:ratio inSection:0];
         _lastIndexPath = indexPath;
-        [_mainView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+//        [_mainView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+        _autoScrollAnimationEable = YES;
+        [self xwp_setMainViewContentOffsetWithIndex:ratio];
     }
     //处理边缘情况,因为用户可能开启bounces, 如果越界直接将bottomLine动画到正确位置
     if (ratio <= 0 || ratio >= _data.count - 1) {
@@ -322,6 +333,7 @@
     if (_lastIndexPath.item == indexPath.item) {
         return;
     }
+    [self xwp_setNeedUpdateModelWithRatio:indexPath.item];
     //设置cell的相应属性
     [self xwp_interpolationForItemsWithRatio:indexPath.item];
     //动画bottomLine
